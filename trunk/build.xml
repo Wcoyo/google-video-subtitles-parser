@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<!-- =============================================================== - ->
+# Copyright (C) 2008 Johans Marvin Taboada Villca <jmt4b04d4v at gmail  dot com>
+#
+# This file is part of google-video-subtitles-parser.
+#
+# google-video-subtitles-parser is free software: you can redistribute it and/or 
+# modify it under the terms of the GNU Lesser General Public License as 
+# published by the Free Software Foundation, either version 3 of the License, 
+# or (at your option) any later version.
+#
+# google-video-subtitles-parser is distributed in the hope that it will be useful, 
+# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser 
+# General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License 
+# along with google-video-subtitles-parser. If not, see <http://www.gnu.org/licenses/>.
+#    =============================================================== -->
+
+<!-- =============================================================== -->
+<!-- Ant build file                                                  -->
+<!-- =============================================================== -->
+
+<project name="google-video-subtitles-parser" default="compile" basedir=".">
+    <description>Builds and test [google-video-subtitles-parser] project.</description>
+
+    <property name="build.compiler" value="modern" />
+    <property name="build.sysclasspath" value="ignore" />
+
+    <property name="name" value="google-video-subtitles-parser" />
+    <property name="version" value="M1" />
+
+    <property name="data" value="${basedir}/data" />
+    <property name="src" value="${basedir}/src/java/main" />
+    <property name="testsrc" value="${basedir}/src/java/test" />
+    <property name="lib" value="${basedir}/lib" />
+    <property name="target" value="${basedir}/target" />
+    <property name="dist" value="${target}/dist" />
+    <property name="build" value="${basedir}/build" />
+    <property name="buildjava" value="${build}/java" />
+    <property name="classes" value="${buildjava}/classes" />
+    <property name="testclasses" value="${buildjava}/test" />
+    <property name="javadocs" value="${build}/javadocs" />
+    <property name="readme" value="README" />
+    <property name="copying" value="COPYING.LESSER" />
+    <property name="packages" value="net.jmt4b04d4v.gvideo.*" />
+    <property name="packages-exclude" value="net.jmt4b04d4v.gvideo.subparser.test.*" />
+
+    <!-- ============================================================= -->
+    <!-- Classpath with needed libraries to compile project            -->
+    <!-- ============================================================= -->
+    <path id="compile.classpath">
+        <fileset dir="${lib}">
+            <include name="**/*.jar" />
+            <include name="**/*.zip" />
+        </fileset>
+    </path>
+
+    <!-- ============================================================= -->
+    <!-- Prepare project structure                                     -->
+    <!-- ============================================================= -->
+    <target name="prepare">
+        <mkdir dir="${build}" />
+        <mkdir dir="${buildjava}" />
+        <mkdir dir="${classes}" />
+        <mkdir dir="${testclasses}" />
+        <mkdir dir="${javadocs}" />
+        <mkdir dir="${target}" />
+        <mkdir dir="${dist}" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Compile source code, copy property files                      -->
+    <!-- ============================================================= -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src}" destdir="${classes}" debug="on" excludes="**/bak/**" optimize="on">
+            <classpath refid="compile.classpath" />
+        </javac>
+        <copy todir="${classes}">
+            <fileset dir="${src}" includes="**/*.properties" />
+        </copy>
+        <javac srcdir="${testsrc}" destdir="${testclasses}" debug="on" excludes="**/bak/**" optimize="on">
+            <classpath refid="compile.classpath" />
+            <classpath path="${classes}" />
+        </javac>
+        <copy todir="${testclasses}">
+            <fileset dir="${testsrc}" includes="**/*.properties" />
+        </copy>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Clean project (generated files)                               -->
+    <!-- ============================================================= -->
+    <target name="clean">
+        <delete quiet="true" dir="${testclasses}" />
+        <delete quiet="true" dir="${classes}" />
+        <delete quiet="true" dir="${buildjava}" />
+        <delete quiet="true" dir="${javadocs}" />
+        <delete quiet="true" dir="${build}" />
+        <delete quiet="true" dir="${dist}" />
+        <delete quiet="true" dir="${target}" />
+        <delete quiet="true">
+            <fileset dir="${basedir}" includes="TEST-*.xml,TEST-*.txt,*.srt,*.ssa" />
+        </delete>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Clean and compile project again                               -->
+    <!-- ============================================================= -->
+    <target name="rebuild">
+        <antcall target="clean" />
+        <antcall target="compile" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create jar files                                              -->
+    <!-- ============================================================= -->
+    <target name="jar" depends="compile">
+        <jar jarfile="${target}/${name}-${version}.jar" manifest="${src}/META-INF/MANIFEST.MF">
+            <fileset dir="${classes}" includes="**/*.class,**/*.properties" excludes=""/>
+            <fileset file="${basedir}/${readme}" />
+            <fileset file="${basedir}/${copying}" />
+        </jar>
+        <jar jarfile="${target}/${name}-tests-${version}.jar" manifest="${testsrc}/META-INF/MANIFEST.MF">
+            <fileset dir="${testclasses}" includes="**/*.class,**/*.properties" excludes=""/>
+            <fileset file="${basedir}/${readme}" />
+            <fileset file="${basedir}/${copying}" />
+        </jar>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create Javadoc API                                            -->
+    <!-- ============================================================= -->
+    <target name="javadocs" depends="compile">
+        <javadoc packagenames="${packages}" 
+                 sourcepath="${src}"
+                 defaultexcludes="yes"
+                 destdir="${javadocs}"
+                 author="true"
+                 version="true"
+                 use="true"
+                 windowtitle="google-video-subtitles-parser API">
+            <doctitle><![CDATA[<h1>google-video-subtitles-parser</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Copyright &#169; 2008 by Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>.</i>]]></bottom>
+            <tag name="todo" scope="all" description="To do:" />
+            <tag name="fixme" scope="all" description="Fixme:" />
+            <group title="Public Packages" packages="net.jmt4b04d4v.gvideo" />
+            <!-- <group title="Internal Implementation Packages" packages="net.jmt4b04d4v.gvideo.internal" /> -->
+            <link offline="true" href="http://java.sun.com/javase/6/docs/api/" 
+                  packagelistLoc="C:\jdk1.6.0_02\docs" />
+            <!-- <link href="http://softwarelibre.org.bo/jmtaboadav" /> -->
+        </javadoc>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_bin_zip distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_bin_zip" depends="jar">
+        <zip destfile="${dist}/${name}-${version}.zip">
+            <zipfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
+            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <zipfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
+            <zipfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
+            <zipfileset dir="${classes}" prefix="${name}-${version}/build/java/classes" />
+            <zipfileset dir="${testclasses}" prefix="${name}-${version}/build/java/test" />
+            <zipfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <zipfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </zip>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_src_zip distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_src_zip">
+        <zip destfile="${dist}/${name}-${version}-src.zip">
+            <zipfileset dir="${data}" includes="videotranscript.xml" prefix="${name}/data" />
+            <zipfileset dir="${src}" excludes="**/*.class" prefix="${name}/src/java/main" />
+            <zipfileset dir="${testsrc}" excludes="**/*.class" prefix="${name}/src/java/test" />
+            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}/lib" />
+            <zipfileset file="${basedir}/${readme}" fullpath="${name}/${readme}" />
+            <zipfileset file="${basedir}/${copying}" fullpath="${name}/${copying}" />
+            <zipfileset dir="." includes="build.xml" fullpath="${name}/build.xml" />
+            <zipfileset dir="." includes=".project" fullpath="${name}/.project" />
+            <zipfileset dir="." includes=".classpath" fullpath="${name}/.classpath" />
+        </zip>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_bin_tar distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_bin_tar" depends="jar">
+        <tar destfile="${dist}/${name}-${version}.tar">
+            <tarfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
+            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <tarfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
+            <tarfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
+            <tarfileset dir="${classes}" prefix="${name}-${version}/build/java/classes" />
+            <tarfileset dir="${testclasses}" prefix="${name}-${version}/build/java/test" />
+            <tarfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <tarfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </tar>
+        <gzip src="${dist}/${name}-${version}.tar" destfile="${dist}/${name}-${version}.tar.gz" />
+        <delete file="${dist}/${name}-${version}.tar" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_src_tar distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_src_tar">
+        <tar destfile="${dist}/${name}-${version}-src.tar">
+            <tarfileset dir="${data}" includes="videotranscript.xml" prefix="${name}/data" />
+            <tarfileset dir="${src}" excludes="**/*.class" prefix="${name}/src/java/main" />
+            <tarfileset dir="${testsrc}" excludes="**/*.class" prefix="${name}/src/java/test" />
+            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}/lib" />
+            <tarfileset file="${basedir}/${readme}" fullpath="${name}/${readme}" />
+            <tarfileset file="${basedir}/${copying}" fullpath="${name}/${copying}" />
+            <tarfileset dir="." includes="build.xml" fullpath="${name}/build.xml" />
+            <tarfileset dir="." includes=".project" fullpath="${name}/.project" />
+            <tarfileset dir="." includes=".classpath" fullpath="${name}/.classpath" />
+        </tar>
+        <gzip src="${dist}/${name}-${version}-src.tar" destfile="${dist}/${name}-${version}-src.tar.gz" />
+        <delete file="${dist}/${name}-${version}-src.tar" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_jar_tar distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_jar_tar" depends="jar">
+        <tar destfile="${dist}/${name}-${version}-jar.tar">
+            <tarfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
+            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <tarfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
+            <tarfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
+            <tarfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <tarfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </tar>
+        <gzip src="${dist}/${name}-${version}-jar.tar" destfile="${dist}/${name}-${version}-jar.tar.gz" />
+        <delete file="${dist}/${name}-${version}-jar.tar" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_jar_zip distribution archive                      -->
+    <!-- ============================================================= -->
+    <target name="dist_jar_zip" depends="jar">
+        <zip destfile="${dist}/${name}-${version}-jar.zip">
+            <zipfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
+            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <zipfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
+            <zipfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
+            <zipfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <zipfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </zip>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_doc_zip distribution archive                     -->
+    <!-- ============================================================= -->
+    <target name="dist_doc_zip" depends="javadocs">
+        <zip destfile="${dist}/${name}-docs-${version}.zip">
+            <zipfileset dir="${javadocs}" includes="**/*" excludes="" prefix="${name}-${version}/docs" />
+            <zipfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <zipfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </zip>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create dist_doc_tar distribution archive                     -->
+    <!-- ============================================================= -->
+    <target name="dist_doc_tar" depends="javadocs">
+        <tar destfile="${dist}/${name}-docs-${version}.tar">
+            <tarfileset dir="${javadocs}" includes="**/*" excludes="" prefix="${name}-${version}/docs" />
+            <tarfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
+            <tarfileset file="${basedir}/${copying}" fullpath="${name}-${version}/${copying}" />
+        </tar>
+        <gzip src="${dist}/${name}-docs-${version}.tar" destfile="${dist}/${name}-docs-${version}.tar.gz" />
+        <delete file="${dist}/${name}-docs-${version}.tar" />
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Create all distribution archives                              -->
+    <!-- ============================================================= -->
+    <target name="dist" 
+            depends="dist_bin_zip, dist_bin_tar, 
+                     dist_src_zip, dist_src_tar, 
+                     dist_jar_zip, dist_jar_tar, 
+                     dist_doc_zip, dist_doc_tar">
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Execute Tests                                                 -->
+    <!-- ============================================================= -->
+    <target name="test" depends="compile">
+        <taskdef name="junit" 
+                 classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask"
+                 classpathref="compile.classpath">
+            <classpath refid="compile.classpath" />
+        </taskdef>
+        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+            <classpath>
+                <pathelement location="${classes}" />
+                <pathelement location="${testclasses}" />
+            </classpath>
+            <formatter type="xml"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubRipTranscriptFormatterTest"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubStationAlphaTranscriptFormatterTest"/>
+        </junit>
+    </target>
+
+    <!-- ============================================================= -->
+    <!-- Execute Tests from jar                                -->
+    <!-- ============================================================= -->
+    <target name="test_jar" depends="jar">
+        <taskdef name="junit" 
+                 classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask"
+                 classpathref="compile.classpath">
+            <classpath refid="compile.classpath" />
+        </taskdef>
+        <junit printsummary="yes" fork="yes" haltonfailure="yes">
+            <classpath>
+                <fileset dir="${target}">
+                    <include name="${name}-${version}.jar" />
+                    <include name="${name}-tests-${version}.jar" />
+                </fileset>
+            </classpath>
+            <formatter type="xml"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubRipTranscriptFormatterTest"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubStationAlphaTranscriptFormatterTest"/>
+        </junit>
+    </target>
+
+</project>
