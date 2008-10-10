@@ -18,7 +18,7 @@ package net.jmt4b04d4v.gvideo.subparser;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>Main</code> TODO document purpose.</p>
+ * <p><code>Main</code> (useless for now, "fake" starting point).</p>
  * 
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>

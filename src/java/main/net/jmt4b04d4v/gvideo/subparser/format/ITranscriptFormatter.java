@@ -21,7 +21,16 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>ITranscriptFormatter</code> TODO document purpose.</p>
+ * <p><code>ITranscriptFormatter</code> is a common interface that exposes the 
+ * common behavior of every transcript formatter, that is:.</p>
+ * <ul>
+ * <li><b>Format transcript document</b>. Translate source transcript to the 
+ * target subtitle file format.</li>
+ * <li><b>Format caption</b>. Translate caption (part of a transcript) to the 
+ * target subtitle file format.</li>
+ * <li><b>Parse string into transcript (inverse of format)</b>. Mostly 
+ * unimplemented, maybe someone needs this?</li>
+ * </ul>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.format.AbstractTranscriptFormatter
  * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
@@ -32,7 +41,7 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
 public interface ITranscriptFormatter {
 
     /**
-     * Format transcript to String representation.
+     * Format transcript object to String representation and append to buffer.
      * 
      * @param transcript Transcript to format.
      * @param toAppendTo Buffer to append result.
@@ -41,7 +50,7 @@ public interface ITranscriptFormatter {
     StringBuffer format(ITranscript transcript, StringBuffer toAppendTo);
     
     /**
-     * Format caption to String representation.
+     * Format caption object to String representation and append to buffer.
      * 
      * @param caption Caption to format.
      * @param toAppendTo Buffer to append result.

@@ -23,7 +23,10 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>AbstractTranscriptFormatter</code> TODO document purpose.</p>
+ * <p><code>AbstractTranscriptFormatter</code> is the base 
+ * <code>ITranscriptFormatter</code> implementation. Implements the 
+ * {@link #format(ITranscript, StringBuffer)} method as an iteration over the 
+ * caption's list.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter
  * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
@@ -35,6 +38,9 @@ public abstract class AbstractTranscriptFormatter implements
         ITranscriptFormatter {
 
     /* (non-Javadoc)
+     * Iterate over the caption's list, and delegate caption formatting to 
+     * the concrete implementations.
+     * 
      * @see net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter#
      * format(ITranscript, java.lang.StringBuffer)
      */

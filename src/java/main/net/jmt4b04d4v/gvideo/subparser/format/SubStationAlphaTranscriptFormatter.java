@@ -25,7 +25,19 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>SubStationAlphaTranscriptFormatter</code> TODO document purpose.</p>
+ * <p><code>SubStationAlphaTranscriptFormatter</code> translates a transcript object 
+ * (a list of captions) to the 
+ * <a href="http://en.wikipedia.org/wiki/SubStation_Alpha">SubStation Alpha</a> 
+ * subtitle file format.</p>
+ * <p>SubStation Alpha is a style-aware subtitle file format which carries sequence, 
+ * timing and textual information and style information. SubStation Alpha 
+ * defines a header with meta data and style information which is referred 
+ * forward in the caption list, so {@link #format(ITranscript, StringBuffer)} 
+ * needs to be overridden in order to provide the header, a common one at this 
+ * time, in the future this could be enhanced.</p>
+ * <p>After the header is the caption list, one caption per line (caption's 
+ * boundaries) and caption's properties are laid in an specific order, so 
+ * {@link #formatCaption(ICaption, StringBuffer)} must be implemented.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter
  * @see      net.jmt4b04d4v.gvideo.subparser.format.AbstractTranscriptFormatter

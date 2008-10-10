@@ -20,7 +20,9 @@ import java.sql.Time;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>AbstractCaption</code> TODO document purpose.</p>
+ * <p><code>AbstractCaption</code> is the base <code>ICaption</code> 
+ * implementation, it defines caption properties as object fields, mostly 
+ * read-only.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.model.ICaption
  * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultCaption
