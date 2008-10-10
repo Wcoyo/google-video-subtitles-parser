@@ -29,7 +29,7 @@
     <property name="build.sysclasspath" value="ignore" />
 
     <property name="name" value="google-video-subtitles-parser" />
-    <property name="version" value="M1" />
+    <property name="version" value="M2dev" />
 
     <property name="data" value="${basedir}/data" />
     <property name="src" value="${basedir}/src/java/main" />
