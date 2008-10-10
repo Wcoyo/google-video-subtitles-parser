@@ -53,14 +53,15 @@ still have hacky fixes.
 
 To do list
 ----------
- * More documentation.
+ * More documentation [I1-DONE].
  * Get Video Transcript URL from Video URL [DONE].
- * Handle locale of desired Subtitle [DONE] (discuss alternatives/selection).
- * A new 'fancy' style for SubStation Alpha subtitles.
- * A handle to override SubStation Alpha default style .
- * A handle to provide SubStation Alpha meta data.
+ * Handle locale of desired Subtitle [DONE] (discuss alternatives/selection) [I2].
+ * A new 'fancy' style for SubStation Alpha subtitles [I3].
+ * A handle to override SubStation Alpha default style [I4].
+ * A handle to provide SubStation Alpha meta data [I5].
  * Implement more translators (extensions of AbstractTranscriptFormatter or 
-   new implementations of ITranscriptFormatter).
+   new implementations of ITranscriptFormatter) [I6].
+ * No more ToDo here, use Google Code Issues [16] instead.
 
 
 Contact
@@ -87,4 +88,4 @@ WWW Resources
  * [12] VSFilter DirectShow filter, http://en.wikipedia.org/wiki/VSFilter
  * [13] SAMI (Synchronized Accessible Media Interchange), http://en.wikipedia.org/wiki/SAMI
  * [14] Understanding SAMI 1.0, http://msdn.microsoft.com/en-us/library/ms971327.aspx
- 
+ * [15] Google Code Project issue tracker, http://code.google.com/p/google-video-subtitles-parser/issues/list
