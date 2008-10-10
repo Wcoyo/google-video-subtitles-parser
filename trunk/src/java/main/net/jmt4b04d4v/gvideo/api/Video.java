@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Locale;
 
 /*
-Fields extracted from GoogleVideo::Video gbat http://google-video.rubyforge.org/
+Fields extracted from GoogleVideo::Video at http://google-video.rubyforge.org/
 
 doc_id                  [R]      the google unique identifier.
 title                   [R]      the title text describing the video.
-description             [R]       the prose text describing the video contents.
+description             [R]      the prose text describing the video contents.
 duration                [R]      the duration of the video in prose, e.g. "1hr 49min" or "3min".
 page_url                [R]      the full url at which the video is available for viewing.
 rating_count            [R]      the number of ratings this video has received.
@@ -51,7 +51,10 @@ view_count_yesterday    [R]      only available via a details request: the numbe
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>Video</code> TODO document purpose.</p>
+ * <p><code>Video</code> is a properties holder class that aims to carry 
+ * information about a particular video at Google Video or YouTube.</p>
+ * <p>It might be useful to implement an API to query Google servers and build 
+ * instances with this information, although this is not needed right now.</p>
  * 
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
@@ -82,15 +85,55 @@ public class Video {
     public static final String G_VIDEO_TRANSCRIPT_PATH_URL = 
         "/videotranscript";
     
+    /**
+     * The the google unique identifier.
+     */
     private String docId;
+    
+    /**
+     * The title text describing the video.
+     */
     private String title;
+    
+    /**
+     * The prose text describing the video contents.
+     */
     private String description;
+    
+    /**
+     * The duration of the video in prose, e.g. "1hr 49min" or "3min".
+     */
     private String duration;
+    
+    /**
+     * The full url at which the video is available for viewing.
+     */
     private URL pageURL;
+    
+    /**
+     * The number of ratings this video has received.
+     */
     private long ratingCount;
+    
+    /**
+     * The number of stars all of the video ratings currently average out to, 
+     * e.g. 4.5.
+     */
     private double starCount;
+    
+    /**
+     * The full url to the video thumbnail image.
+     */
     private URL thumbnailImageUrl;
+    
+    /**
+     * The date at which the video was uploaded.
+     */
     private Date uploadDate;
+    
+    /**
+     * The name of the user who uploaded the video; not always available.
+     */
     private String uploadUser;
     
     /**
@@ -244,6 +287,16 @@ public class Video {
         this.uploadUser = uploadUser;
     }
     
+    /**
+     * <p>An utility method to obtain the URL of a particular transcript 
+     * (including location) providing video URL or transcript URL.</p>
+     * <p>This can be relocated in the future to a more appropriate place.</p>
+     * 
+     * @param parsableURLStr A String representation of an URL pointing: 
+     * to the video itself or to a particular transcript.
+     * @return A String representation of an URL pointing to the transcript 
+     * inferring locate if needed.
+     */
     public static String getVideoTranscriptURL(String parsableURLStr){
         //analyze provided URL String
         HashMap<String, String> urlParameters = null;

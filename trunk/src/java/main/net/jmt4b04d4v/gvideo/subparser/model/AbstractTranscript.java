@@ -26,7 +26,9 @@ import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>AbstractTranscript</code> TODO document purpose.</p>
+ * <p><code>AbstractTranscript</code> is the base <code>ITranscript</code> 
+ * implementation. Provides a basic implementation of the structure and 
+ * behavior.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.model.ITranscript
  * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultTranscript
@@ -54,6 +56,8 @@ public abstract class AbstractTranscript implements ITranscript {
     }
     
     /* (non-Javadoc)
+     * Sort captions by sequential number.
+     * 
      * @see net.jmt4b04d4v.gvideo.subparser.model.ITranscript#sortCaptions()
      */
     @Override
@@ -70,6 +74,8 @@ public abstract class AbstractTranscript implements ITranscript {
     }
     
     /* (non-Javadoc)
+     * IoC, delegate control to ITranscriptFormatter implementation.
+     * 
      * @see net.jmt4b04d4v.gvideo.subparser.model.ITranscript#
      * formatTranscript(ITranscriptFormatter, StringBuffer)
      */

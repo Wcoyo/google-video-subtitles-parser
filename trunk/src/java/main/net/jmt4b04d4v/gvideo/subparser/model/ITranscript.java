@@ -22,7 +22,8 @@ import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>ITranscript</code> TODO document purpose.</p>
+ * <p><code>ITranscript</code> interface defines the captions list object 
+ * structure and behavior.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.model.AbstractTranscript
  * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultTranscript

@@ -25,7 +25,16 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>SubRipTranscriptFormatter</code> TODO document purpose.</p>
+ * <p><code>SubRipTranscriptFormatter</code> translates a transcript object 
+ * (a list of captions) to the <a href="http://en.wikipedia.org/wiki/SubRip">SubRip</a> 
+ * subtitle file format.</p>
+ * <p>SubRip is a style-less subtitle file format which carries sequence, 
+ * timing and textual information only. SubRip doesn't define header or 
+ * another meta data so {@link #format(ITranscript, StringBuffer)} doesn't need 
+ * to be overridden.</p>
+ * <p>Sequence numbering defines caption's boundaries and other caption's 
+ * properties are laid in an specific order, so 
+ * {@link #formatCaption(ICaption, StringBuffer)} must be implemented.</p>
  * 
  * @see      net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter
  * @see      net.jmt4b04d4v.gvideo.subparser.format.AbstractTranscriptFormatter
@@ -42,6 +51,8 @@ public class SubRipTranscriptFormatter extends AbstractTranscriptFormatter {
         new SimpleDateFormat("HH:mm:ss,SSS");
     
     /* (non-Javadoc)
+     * Format captions as defined in the SubRip file format.
+     * 
      * @see net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter#
      * formatCaption(ICaption, java.lang.StringBuffer)
      */

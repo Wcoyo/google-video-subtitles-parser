@@ -33,7 +33,14 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>GoogleVideoSAXParser</code> TODO document purpose.</p>
+ * <p><code>GoogleVideoSAXParser</code> is an example console application that 
+ * uses current API and translates available subtitles of a hosted video at 
+ * Google Video and translates it to SubRip and SubStation Alpha file 
+ * formats.</p>
+ * <p>It's provided as a current start point and as an exemplary 
+ * implementation for API usage.</p>
+ * <p>Translation to another subtitle file formats should work the same or at 
+ * least the like.</p>
  * 
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>

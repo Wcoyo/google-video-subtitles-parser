@@ -34,21 +34,64 @@ import org.xml.sax.helpers.DefaultHandler;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>GVXMLTranscriptHandler</code> TODO document purpose.</p>
+ * <p><code>GVXMLTranscriptHandler</code> is a SAX based XML reader utility 
+ * that handles Google Video/YouTube <em>transcript</em> documents that carry 
+ * subtitle information for some of their hosted videos. SAX is event driven, 
+ * so this particular handler is appropriate only for this type of documents.</p>
+ * <p>Although transcript documents doesn't provide validation information, its 
+ * structure is straight and simple, it's a sequential list of captions grouped 
+ * in a single <em>transcript</em> surrounding tag, where each caption tag holds 
+ * information about timing and text for presentation.</p>
+ * <p>Main processing is targeted at caption (<em>text</em>) tags.</p>
  * 
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public class GVXMLTranscriptHandler extends DefaultHandler {
 
+    /**
+     * Logging writer. Would Log4J be really necessary?.
+     */
     private Writer out = null;
+    
+    /**
+     * Main buffer, where caption text is read, and from where we extract it.
+     */
     private StringBuffer buffer = null;
+    
+    /**
+     * Caption tag name.
+     */
     public static final String CAPTION_TAG_NAME = "text";
+    
+    /**
+     * Caption start time attribute name.
+     */
     public static final String CAPTION_START_TIME_ATT_NAME = "start";
+    
+    /**
+     * Caption duration attribute name.
+     */
     public static final String CAPTION_DURATION_ATT_NAME = "dur";
+    
+    /**
+     * Transcript (sequence of captions) tag name.
+     */
     public static final String TRANSCRIPT_TAG_NAME = "transcript";
+    
+    /**
+     * Transcript holder.
+     */
     private ITranscript transcript = null;
+    
+    /**
+     * Current caption holder.
+     */
     private ICaption currentCaption = null;
+    
+    /**
+     * Current caption number being processed.
+     */
     private int currentCaptionNumber = 0;
     
     /* *
@@ -67,6 +110,11 @@ public class GVXMLTranscriptHandler extends DefaultHandler {
         currentCaptionNumber = 0;
     }
     
+    /**
+     * Constructor with Logging writer provided.
+     * 
+     * @param out Logging writer provided.
+     */
     public GVXMLTranscriptHandler(Writer out) {
         super();
         this.out = out;
@@ -81,6 +129,10 @@ public class GVXMLTranscriptHandler extends DefaultHandler {
     }
     
     /* (non-Javadoc)
+     * This method is called when the SAX reader reach a new start tag.
+     * Here we initialize our transcript holder, or create captions and read 
+     * its properties.
+     * 
      * @see org.xml.sax.helpers.DefaultHandler#
      * startElement(String, String, String, Attributes)
      */
@@ -136,6 +188,10 @@ public class GVXMLTranscriptHandler extends DefaultHandler {
     }
     
     /* (non-Javadoc)
+     * This method is called when the SAX reader reach an end tag.
+     * Here we read and set caption text, add it to the transcript holder and 
+     * reinitialize caption holder and buffer.
+     * 
      * @see org.xml.sax.helpers.DefaultHandler#
      * endElement(String, String, String)
      */
@@ -167,6 +223,9 @@ public class GVXMLTranscriptHandler extends DefaultHandler {
     }
     
     /* (non-Javadoc)
+     * This method is called when the SAX reader is reading tag text contents.
+     * Here we read and fill the text buffer.
+     * 
      * @see org.xml.sax.helpers.DefaultHandler#characters(char[], int, int)
      */
     @Override
