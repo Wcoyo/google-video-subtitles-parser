@@ -3,11 +3,8 @@
  */
 package net.jmt4b04d4v.gvideo.api;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 
 /*
 Fields extracted from GoogleVideo::Video at http://google-video.rubyforge.org/
@@ -56,35 +53,11 @@ view_count_yesterday    [R]      only available via a details request: the numbe
  * <p>It might be useful to implement an API to query Google servers and build 
  * instances with this information, although this is not needed right now.</p>
  * 
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/14
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public class Video {
 
-    /**
-     * Google Video Host.
-     */
-    public static final String G_VIDEO_HOST = 
-        "video.google.com";
-    
-    /**
-     * Google Video Host.
-     */
-    public static final String G_VIDEO_PROTOCOL = 
-        "http";
-    
-    /**
-     * Google Video path URL.
-     */
-    public static final String G_VIDEO_PATH_URL = 
-        "/videoplay";
-    
-    /**
-     * Google Video Transcript path URL.
-     */
-    public static final String G_VIDEO_TRANSCRIPT_PATH_URL = 
-        "/videotranscript";
-    
     /**
      * The the google unique identifier.
      */
@@ -287,97 +260,4 @@ public class Video {
         this.uploadUser = uploadUser;
     }
     
-    /**
-     * <p>An utility method to obtain the URL of a particular transcript 
-     * (including location) providing video URL or transcript URL.</p>
-     * <p>This can be relocated in the future to a more appropriate place.</p>
-     * 
-     * @param parsableURLStr A String representation of an URL pointing: 
-     * to the video itself or to a particular transcript.
-     * @return A String representation of an URL pointing to the transcript 
-     * inferring locate if needed.
-     */
-    public static String getVideoTranscriptURL(String parsableURLStr){
-        //analyze provided URL String
-        HashMap<String, String> urlParameters = null;
-        URL url = null;
-        try {
-            //Analyze URL
-            url = new URL(parsableURLStr);
-            //URL sections
-            //System.out.println(url.getAuthority());
-            //System.out.println(url.getDefaultPort());
-            //System.out.println(url.getFile());
-            System.out.println(url.getHost());
-            System.out.println(url.getPath());
-            //System.out.println(url.getPort());
-            //System.out.println(url.getProtocol());
-            //System.out.println(url.getQuery());
-            //System.out.println(url.getRef());
-            //Analize protocol host and path requested
-            boolean videoTranscriptURLFlag = false;
-            boolean videoURLFlag = false;
-            if ( (url.getHost().equals(G_VIDEO_HOST)) &&
-                    (url.getPath().equals(G_VIDEO_TRANSCRIPT_PATH_URL)))
-                //protocol host and path OK, analyze Query String
-                videoTranscriptURLFlag = true;
-            else if ( (url.getHost().equals(G_VIDEO_HOST)) &&
-                    (url.getPath().equals(G_VIDEO_PATH_URL)))
-                //User provided Video URL, infer Transcript URL
-                videoURLFlag = true;
-            else
-                //User provided any other URL
-                throw new RuntimeException(url + " is an invalid URL.");
-            //Analyze Query String
-            String [] paramsArray = url.getQuery().split("&");
-            urlParameters = 
-                new HashMap<String, String>(paramsArray.length);
-            for (int i = 0; i < paramsArray.length; i++) {
-                String [] keyValuePair = paramsArray[i].split("=");
-                urlParameters.put(keyValuePair[0], 
-                        (keyValuePair.length == 2)? keyValuePair[1] : null );
-            }
-            System.out.println(urlParameters);
-            String docid = "docid";
-            String name = "name";
-            String lang = "lang";
-            //Find out wich path was requested: Video or Transcript
-            //A) Most Optimistic scenario
-            if (videoTranscriptURLFlag && 
-                    urlParameters.get(docid) != null &&
-                    urlParameters.containsKey(name) &&
-                    urlParameters.get(lang) != null)
-                ;
-            //A) Second Optimistic scenario (unlikely, but maybe) 
-            else if (videoURLFlag && 
-                    urlParameters.get(docid) != null &&
-                    urlParameters.containsKey(name) &&
-                    urlParameters.get(lang) != null) {
-                //correct parsable URL, point to Transcript URL
-                parsableURLStr = 
-                    G_VIDEO_PROTOCOL + "://" + G_VIDEO_HOST + 
-                    G_VIDEO_TRANSCRIPT_PATH_URL + "?" + url.getQuery();
-                System.out.println("Corrected URL: " + parsableURLStr);
-            }
-            else if (urlParameters.get(docid) == null)
-                throw new RuntimeException(url + 
-                        " is missing '" + docid + "' mandatory parameter.");
-            //protocol host and path corrected (if needed) and valid. 
-            //Parameter 'docid' provided, 'lang' is null, infer from Locale
-            else if (urlParameters.get(lang) == null) {
-                //build Transcript URL
-                parsableURLStr = 
-                    G_VIDEO_PROTOCOL + "://" + G_VIDEO_HOST + 
-                    G_VIDEO_TRANSCRIPT_PATH_URL + "?" + 
-                    docid + "=" + urlParameters.get(docid) + 
-                    "&" + name + "=" + ((urlParameters.get(name) == null)? 
-                            "" : urlParameters.get(name)) + 
-                    "&" + lang + "=" + Locale.getDefault().getLanguage();
-                System.out.println("Corrected URL (lang=null): " + parsableURLStr);
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(url + " is not a well-formed URL.", e);
-        }
-        return parsableURLStr;
-    }
 }

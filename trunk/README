@@ -25,7 +25,11 @@ Project
 -------
 The project is simply an utility that provides an XML parser for Google Video 
 transcriptions, and provides translators for some of the most common subtitle 
-file formats [9].
+file formats [9]. In the future it could be extended to cover another Video 
+sharing websites (e.g. YouTube, file a ticket if you're interested).
+
+API can be considered currently unstable and may change in following releases 
+with proper justification.
 
 
 Distribution
@@ -35,6 +39,10 @@ For distribution terms see COPYING.LESSER file in distribution archive.
 
 Usage
 -----
+Current implementation works if video URL or transcript URL is provided. 
+Desired language subtitle track may be provided as part of the URL, if not it 
+will be prompted as user input from available list of subtitle tracks.
+
 From jar distribution:
 $ java -jar google-video-subtitles-parser.jar net.jmt4b04d4v.gvideo.sax.GoogleVideoSAXParser URL
 
@@ -55,7 +63,7 @@ To do list
 ----------
  * More documentation [I1-DONE].
  * Get Video Transcript URL from Video URL [DONE].
- * Handle locale of desired Subtitle [DONE] (discuss alternatives/selection) [I2].
+ * Handle locale of desired Subtitle (discuss alternatives/selection) [I2-DONE].
  * A new 'fancy' style for SubStation Alpha subtitles [I3].
  * A handle to override SubStation Alpha default style [I4].
  * A handle to provide SubStation Alpha meta data [I5].

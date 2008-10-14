@@ -3,16 +3,18 @@
  */
 package net.jmt4b04d4v.gvideo.sax;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-import net.jmt4b04d4v.gvideo.api.Video;
 import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
 import net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter;
 import net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter;
 import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
+import net.jmt4b04d4v.gvideo.util.GoogleVideoURLParser;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -42,7 +44,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * <p>Translation to another subtitle file formats should work the same or at 
  * least the like.</p>
  * 
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/14
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public class GoogleVideoSAXParser {
@@ -82,22 +84,90 @@ public class GoogleVideoSAXParser {
     public static void main(String[] args) {
         String parsableURLStr = null;
         if (args.length != 1) {
-            //FIXME we shouldn't be hammering that Video, fix it with 
+            //we shouldn't be hammering Randy's Video, fix it with 
             //appropriate arguments management.
             // We can use http://commons.apache.org/cli/ later
             System.out.println(
                     "Usage: java net.jmt4b04d4v.gvideo.sax.GoogleVideoSAXParser URL");
-            //return;
-            System.out.println(
+            return;
+            /*System.out.println(
                     "No URL provided, using [" + 
                     G_VIDEO_ES_TRANSCRIPT_URL + "] as example");
-            parsableURLStr = G_VIDEO_ES_TRANSCRIPT_URL;
+            parsableURLStr = G_VIDEO_ES_TRANSCRIPT_URL;*/
         } else
             parsableURLStr = args[0];
         //Analyze provided URL String, correct if necessary. 
-        //Stop if URL is invalid 
-        //TODO verify 'invalid criteria'
-        parsableURLStr = Video.getVideoTranscriptURL(parsableURLStr);
+        
+        //Hold a reference of ContentHandler for post-parsing purposes 
+        GVXMLTranscriptListHandler transcriptListHandler = null;
+        int selectedLanguageTrack = 0;
+        
+        //Skip language selection if transcript URL with provided language 
+        //has been submitted, 
+        if (!GoogleVideoURLParser.isTranscriptURLLangIncluded(parsableURLStr)) {
+            //select an available locate from the available list
+            //parse related <transcript_list>
+            String anotherParsableURLStr = GoogleVideoURLParser.getVideoTranscriptListURL(parsableURLStr);
+            //Parse XML document with custom ContentHandler 
+            try {
+                //Create an instance of Apache Xerces SAXParser
+                /*XMLReader parser = XMLReaderFactory.createXMLReader(
+                        "org.apache.xerces.parsers.SAXParser");*/
+                //Create an instance of XMLReader from system defaults
+                XMLReader parser = XMLReaderFactory.createXMLReader();
+                //Create new TranscriptListHandler, set output to Console output
+                transcriptListHandler = new GVXMLTranscriptListHandler();
+                //Set Content Handler
+                parser.setContentHandler(transcriptListHandler);
+                parser.parse(anotherParsableURLStr);
+                //Print parsing results
+                System.out.println("\n" + anotherParsableURLStr + " is well-formed.");
+            } catch (SAXException e) {
+                //Document might be not well-formed, or subtitles may not be 
+                //present for the requested video. Verify.
+                throw new RuntimeException(
+                        "\n" + anotherParsableURLStr + " is not well-formed, or " + 
+                        "subtitle tracks may not be present, verify it.", e);
+            } catch (IOException e) { 
+                throw new RuntimeException(
+                        "Due to an IOException, the parser could not check " + 
+                        anotherParsableURLStr, e);
+            }
+            //print available subtitles list and ask for one of them
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Available subtitle tracks:");
+            System.out.print(transcriptListHandler.trackListAsString());
+            System.out.print("Insert selected track id:");
+            try {
+                selectedLanguageTrack = Integer.parseInt(entrada.readLine());
+                while(selectedLanguageTrack < 0 || selectedLanguageTrack >= transcriptListHandler.getTrackListSize()){
+                    System.out.println("Invalid track id!\n");
+                    System.out.println("Available subtitle tracks:");
+                    System.out.print(transcriptListHandler.trackListAsString());
+                    System.out.print("Insert selected track id:");
+                    selectedLanguageTrack = Integer.parseInt(entrada.readLine());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Reading error", e);
+            }
+            //valid track id, create appropriate URL
+            System.out.println("\nProcessing '" + 
+                    transcriptListHandler.getTrackById(selectedLanguageTrack).getTrackLangOrig() + 
+                    "' subtitles.");
+            parsableURLStr = GoogleVideoURLParser.getVideoTranscriptURL(
+                    parsableURLStr, 
+                    transcriptListHandler.getTrackById(selectedLanguageTrack).getTrackLangCode());
+        }
+        else {
+            System.out.println("\nProcessing subtitles from user provided " +
+                    "transcript URL at [" + parsableURLStr + "]");
+            parsableURLStr = GoogleVideoURLParser.getVideoTranscriptURL(
+                    parsableURLStr, null);
+        }
+        
+        //print parsableURLStr
+        System.out.print("Please wait...\n");
+        
         //Hold a reference of ContentHandler for post-parsing purposes 
         GVXMLTranscriptHandler handler = null;
         //Parse XML document with custom ContentHandler 

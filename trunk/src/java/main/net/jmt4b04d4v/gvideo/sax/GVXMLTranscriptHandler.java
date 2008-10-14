@@ -44,7 +44,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * information about timing and text for presentation.</p>
  * <p>Main processing is targeted at caption (<em>text</em>) tags.</p>
  * 
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/14
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public class GVXMLTranscriptHandler extends DefaultHandler {
@@ -219,7 +219,7 @@ public class GVXMLTranscriptHandler extends DefaultHandler {
             } catch (IOException e) {
                 throw new SAXException(e);
             }
-          }
+        }
     }
     
     /* (non-Javadoc)
