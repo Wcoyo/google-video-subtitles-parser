@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.model;
+package net.jmt4b04d4v.video.subparser.model;
 
 import java.sql.Time;
 
@@ -24,8 +24,8 @@ import java.sql.Time;
  * implementation, it defines caption properties as object fields, mostly 
  * read-only.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.model.ICaption
- * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultCaption
+ * @see      net.jmt4b04d4v.video.subparser.model.ICaption
+ * @see      net.jmt4b04d4v.video.subparser.model.DefaultCaption
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */

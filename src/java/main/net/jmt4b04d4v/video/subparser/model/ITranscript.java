@@ -1,11 +1,11 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.model;
+package net.jmt4b04d4v.video.subparser.model;
 
 import java.util.List;
 
-import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -25,8 +25,8 @@ import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
  * <p><code>ITranscript</code> interface defines the captions list object 
  * structure and behavior.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.model.AbstractTranscript
- * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultTranscript
+ * @see      net.jmt4b04d4v.video.subparser.model.AbstractTranscript
+ * @see      net.jmt4b04d4v.video.subparser.model.DefaultTranscript
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */

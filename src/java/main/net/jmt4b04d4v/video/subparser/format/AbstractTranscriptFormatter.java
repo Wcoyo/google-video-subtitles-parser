@@ -1,12 +1,12 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.format;
+package net.jmt4b04d4v.video.subparser.format;
 
 import java.util.Iterator;
 
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
-import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -28,9 +28,9 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * {@link #format(ITranscript, StringBuffer)} method as an iteration over the 
  * caption's list.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubStationAlphaTranscriptFormatter
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */

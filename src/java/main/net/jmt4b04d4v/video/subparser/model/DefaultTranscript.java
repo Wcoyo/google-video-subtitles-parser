@@ -1,9 +1,7 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.model;
-
-import java.sql.Time;
+package net.jmt4b04d4v.video.subparser.model;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -20,48 +18,15 @@ import java.sql.Time;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>ICaption</code> interface defines common caption properties, 
- * mostly read-only.</p>
+ * <p><code>DefaultTranscript</code> is a concrete <code>ITranscript</code> 
+ * implementation. It doesn't add anything special yet, only a concrete class 
+ * which can be instantiated.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.model.AbstractCaption
- * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultCaption
+ * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
+ * @see      net.jmt4b04d4v.video.subparser.model.AbstractTranscript
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public interface ICaption {
+public class DefaultTranscript extends AbstractTranscript {
 
-    /**
-     * Sequential number, not generally applicable.
-     * 
-     * @return The sequential number.
-     */
-    int getNumber();
-    
-    /**
-     * The caption's presentation start time.
-     * 
-     * @return Caption's presentation start time.
-     */
-    Time getStartTime();
-    
-    /**
-     * The caption's presentation duration.
-     * 
-     * @return Caption's presentation duration.
-     */
-    long getDurationInMillis();
-    
-    /**
-     * The caption's text.
-     * 
-     * @return Caption's text.
-     */
-    String getText();
-    
-    /**
-     * Set the caption's text.
-     * 
-     * @param text The Caption's text to set.
-     */
-    void setText(String text);
 }

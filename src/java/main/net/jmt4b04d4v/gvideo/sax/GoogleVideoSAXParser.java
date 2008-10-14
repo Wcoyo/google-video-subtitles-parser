@@ -10,11 +10,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
-import net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter;
-import net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter;
-import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
 import net.jmt4b04d4v.gvideo.util.GoogleVideoURLParser;
+import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.format.SubStationAlphaTranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -74,6 +74,12 @@ public class GoogleVideoSAXParser {
      */
     public static final String SSA_OUTPUT_FILE = 
         "output.ssa";
+    
+    /**
+     * Google Video output file
+     */
+    public static final String GV_OUTPUT_FILE = 
+        "output.gv";
     
     /**
      * Main method (and current start point)
@@ -195,8 +201,30 @@ public class GoogleVideoSAXParser {
                     "Due to an IOException, the parser could not check " + 
                     parsableURLStr, e);
         }
-        //Make SubRip subtitles
+        //Writer object
         Writer out = null;
+        //Make Google Video subtitles
+        try {
+            //Get transcript from ContentHandler
+            ITranscript transcript = handler.getTranscript();
+            //Get transcript translator
+            ITranscriptFormatter formatter = 
+                new net.jmt4b04d4v.gvideo.subparser.format.GoogleVideoTranscriptFormatter();
+            //Format transcript
+            StringBuffer result = 
+                transcript.formatTranscript(formatter, new StringBuffer());
+            //Print string value
+            System.out.print(result.toString());
+            //Print to file
+            out = new PrintWriter(new File(GV_OUTPUT_FILE));
+            out.write(result.toString(),0,result.toString().length());
+            out.flush();
+            out.close();
+        } catch (IOException e) { 
+            throw new RuntimeException(
+                    "I/O Exception, output file may be inconsistent", e);
+        }
+        //Make SubRip subtitles
         try {
             //Get transcript from ContentHandler
             ITranscript transcript = handler.getTranscript();
