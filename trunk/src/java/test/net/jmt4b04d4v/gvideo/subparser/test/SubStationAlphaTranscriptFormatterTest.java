@@ -4,7 +4,7 @@
 package net.jmt4b04d4v.gvideo.subparser.test;
 
 import junit.framework.TestCase;
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import org.junit.Test;
  * <p><code>SubStationAlphaTranscriptFormatterTest</code> tests SubStation 
  * Alpha transcript formatter.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubStationAlphaTranscriptFormatter
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
@@ -43,7 +43,7 @@ public class SubStationAlphaTranscriptFormatterTest extends TestCase {
 
     /**
      * Test method for {@link 
-     * net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter#
+     * net.jmt4b04d4v.video.subparser.format.SubStationAlphaTranscriptFormatter#
      * formatCaption(ICaption, StringBuffer)}.
      */
     @Test

@@ -10,10 +10,10 @@ import java.sql.Time;
 //import java.text.ParseException;
 //import java.text.SimpleDateFormat;
 
-import net.jmt4b04d4v.gvideo.subparser.model.DefaultCaption;
-import net.jmt4b04d4v.gvideo.subparser.model.DefaultTranscript;
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
-import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
+import net.jmt4b04d4v.video.subparser.model.DefaultCaption;
+import net.jmt4b04d4v.video.subparser.model.DefaultTranscript;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

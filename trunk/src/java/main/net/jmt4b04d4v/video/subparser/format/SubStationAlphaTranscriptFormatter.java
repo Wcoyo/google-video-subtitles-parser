@@ -1,14 +1,14 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.format;
+package net.jmt4b04d4v.video.subparser.format;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
-import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -39,9 +39,9 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * boundaries) and caption's properties are laid in an specific order, so 
  * {@link #formatCaption(ICaption, StringBuffer)} must be implemented.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.AbstractTranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.AbstractTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
@@ -54,6 +54,9 @@ public class SubStationAlphaTranscriptFormatter extends
     private SimpleDateFormat dateFormatter = 
         new SimpleDateFormat("HH:mm:ss.SS");
     
+    /**
+     * SubStation Alpha header (a custom one, fix this).
+     */
     private String defaultHeader = "" + 
         "[Script Info]\n" + 
         "; This is a Sub Station Alpha v4 script.\n" + 

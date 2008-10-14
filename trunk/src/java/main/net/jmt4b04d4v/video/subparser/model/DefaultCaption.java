@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.model;
+package net.jmt4b04d4v.video.subparser.model;
 
 import java.sql.Time;
 
@@ -23,8 +23,8 @@ import java.sql.Time;
  * <p><code>DefaultCaption</code> is a concrete <code>ICaption</code> 
  * implementation. It defines a constructor with parameters.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.model.ICaption
- * @see      net.jmt4b04d4v.gvideo.subparser.model.AbstractCaption
+ * @see      net.jmt4b04d4v.video.subparser.model.ICaption
+ * @see      net.jmt4b04d4v.video.subparser.model.AbstractCaption
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */

@@ -1,10 +1,10 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.format;
+package net.jmt4b04d4v.video.subparser.format;
 
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
-import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -32,9 +32,9 @@ import net.jmt4b04d4v.gvideo.subparser.model.ITranscript;
  * unimplemented, maybe someone needs this?</li>
  * </ul>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.format.AbstractTranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubStationAlphaTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.AbstractTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubStationAlphaTranscriptFormatter
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */

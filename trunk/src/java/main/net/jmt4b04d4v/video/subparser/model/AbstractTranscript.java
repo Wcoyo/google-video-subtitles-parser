@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.jmt4b04d4v.gvideo.subparser.model;
+package net.jmt4b04d4v.video.subparser.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -30,12 +30,12 @@ import net.jmt4b04d4v.gvideo.subparser.format.ITranscriptFormatter;
  * implementation. Provides a basic implementation of the structure and 
  * behavior.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.model.ITranscript
- * @see      net.jmt4b04d4v.gvideo.subparser.model.DefaultTranscript
+ * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
+ * @see      net.jmt4b04d4v.video.subparser.model.DefaultTranscript
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public abstract class AbstractTranscript implements ITranscript {
+public abstract class AbstractTranscript implements ITranscript, Cloneable {
 
     protected List<ICaption> captions = new ArrayList<ICaption>();
     

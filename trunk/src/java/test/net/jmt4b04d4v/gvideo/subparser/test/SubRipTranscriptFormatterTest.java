@@ -4,7 +4,7 @@
 package net.jmt4b04d4v.gvideo.subparser.test;
 
 import junit.framework.TestCase;
-import net.jmt4b04d4v.gvideo.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.model.ICaption;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import org.junit.Test;
  * <p><code>SubRipTranscriptFormatterTest</code> tests SubRip transcript 
  * formatter.</p>
  * 
- * @see      net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter
+ * @see      net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
@@ -43,7 +43,7 @@ public class SubRipTranscriptFormatterTest extends TestCase {
 
     /**
      * Test method for {@link 
-     * net.jmt4b04d4v.gvideo.subparser.format.SubRipTranscriptFormatter#
+     * net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter#
      * formatCaption(ICaption, StringBuffer)}.
      */
     @Test
