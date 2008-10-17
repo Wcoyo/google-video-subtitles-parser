@@ -25,10 +25,10 @@ package net.jmt4b04d4v.gvideo.subparser.model;
  * <p>Defines fields, implement setters and getters, and override string 
  * representation.</p>
  * 
- * @version  M2 2008/10/14
+ * @version  M2 2008/10/16
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public class AbstractTranscriptMetadata implements ITranscriptMetadata {
+public abstract class AbstractTranscriptMetadata implements ITranscriptMetadata {
 
     /**
      * The track id number

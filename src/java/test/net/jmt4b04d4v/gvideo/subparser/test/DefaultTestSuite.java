@@ -1,9 +1,10 @@
 /**
  * 
  */
-package net.jmt4b04d4v.video.subparser.model;
+package net.jmt4b04d4v.gvideo.subparser.test;
 
-import java.util.Iterator;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
@@ -20,28 +21,27 @@ import java.util.Iterator;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>DefaultTranscript</code> is a concrete <code>ITranscript</code> 
- * implementation. It doesn't add anything special yet, only a concrete class 
- * which can be instantiated.</p>
+ * <p><code>DefaultTestSuite</code> contains all the tests currently 
+ * implemented.</p>
  * 
- * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
- * @see      net.jmt4b04d4v.video.subparser.model.AbstractTranscript
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/17
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public class DefaultTranscript extends AbstractTranscript {
+public class DefaultTestSuite {
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
+    /**
+     * Build the <code>TestSuite</code> to run.
+     * 
+     * @return The <code>TestSuite</code> to run.
      */
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        DefaultTranscript transcriptClone = new DefaultTranscript();
-        for (Iterator<ICaption> iter = captions.iterator(); iter.hasNext();) {
-            ICaption captionClone = iter.next().doClone();
-            transcriptClone.captions.add(captionClone);
-        }
-        return transcriptClone;
+    public static Test suite() {
+        TestSuite suite = new TestSuite("All-tests");
+        //$JUnit-BEGIN$
+        suite.addTestSuite(ParseGoogleVideoTranscriptTest.class);
+        suite.addTestSuite(SubRipTranscriptFormatterTest.class);
+        suite.addTestSuite(SubStationAlphaTranscriptFormatterTest.class);
+        suite.addTestSuite(DropCaptionsFilterTest.class);
+        //$JUnit-END$
+        return suite;
     }
-    
 }

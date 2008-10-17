@@ -32,7 +32,7 @@ import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
  * 
  * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
  * @see      net.jmt4b04d4v.video.subparser.model.DefaultTranscript
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/16
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public abstract class AbstractTranscript implements ITranscript, Cloneable {
@@ -98,5 +98,15 @@ public abstract class AbstractTranscript implements ITranscript, Cloneable {
         }
         return buffer.toString();
     }
-
+    
+    /* (non-Javadoc)
+     * Delegate method implementation of java.lang.Object#clone()
+     * 
+     * @see net.jmt4b04d4v.video.subparser.model.ITranscript#doClone()
+     */
+    @Override
+    public ITranscript doClone() throws CloneNotSupportedException {
+        return (ITranscript) this.clone();
+    }
+    
 }

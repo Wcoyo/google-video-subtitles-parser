@@ -21,15 +21,14 @@ import java.sql.Time;
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>AbstractCaption</code> is the base <code>ICaption</code> 
- * implementation, it defines caption properties as object fields, mostly 
- * read-only.</p>
+ * implementation, it defines caption properties as object fields.</p>
  * 
  * @see      net.jmt4b04d4v.video.subparser.model.ICaption
  * @see      net.jmt4b04d4v.video.subparser.model.DefaultCaption
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/16
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public abstract class AbstractCaption implements ICaption {
+public abstract class AbstractCaption implements ICaption, Cloneable {
 
     /**
      * The caption's duration in milliseconds, or <em>how long show it</em>.
@@ -52,21 +51,21 @@ public abstract class AbstractCaption implements ICaption {
     protected String text;
     
     /* (non-Javadoc)
-     * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#getDurationInMillis()
-     */
-    @Override
-    public long getDurationInMillis() {
-        return durationInMillis;
-    }
-
-    /* (non-Javadoc)
      * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#getNumber()
      */
     @Override
     public int getNumber() {
         return number;
     }
-
+    
+    /* (non-Javadoc)
+     * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#setNumber(int)
+     */
+    @Override
+    public void setNumber(int newNumber) {
+        this.number = newNumber;
+    }
+    
     /* (non-Javadoc)
      * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#getStartTime()
      */
@@ -74,7 +73,31 @@ public abstract class AbstractCaption implements ICaption {
     public Time getStartTime() {
         return startTime;
     }
-
+    
+    /* (non-Javadoc)
+     * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#setStartTime(Time)
+     */
+    @Override
+    public void setStartTime(Time newStartTime) {
+        this.startTime = newStartTime;
+    }
+    
+    /* (non-Javadoc)
+     * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#getDurationInMillis()
+     */
+    @Override
+    public long getDurationInMillis() {
+        return durationInMillis;
+    }
+    
+    /* (non-Javadoc)
+     * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#setDurationInMillis(long)
+     */
+    @Override
+    public void setDurationInMillis(long newDurationInMillis) {
+        this.durationInMillis = newDurationInMillis;
+    }
+    
     /* (non-Javadoc)
      * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#getText()
      */
@@ -82,7 +105,7 @@ public abstract class AbstractCaption implements ICaption {
     public String getText() {
         return text;
     }
-
+    
     /* (non-Javadoc)
      * @see net.jmt4b04d4v.gvideo.subparser.model.ICaption#setText(String)
      */
@@ -108,5 +131,15 @@ public abstract class AbstractCaption implements ICaption {
               .append("\n\n")*/;
         return buffer.toString();
     }
-
+    
+    /* (non-Javadoc)
+     * Delegate method implementation of java.lang.Object#clone()
+     * 
+     * @see net.jmt4b04d4v.video.subparser.model.ICaption#doClone()
+     */
+    @Override
+    public ICaption doClone() throws CloneNotSupportedException {
+        return (ICaption) this.clone();
+    }
+    
 }

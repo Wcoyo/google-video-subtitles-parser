@@ -51,5 +51,17 @@ public final class DefaultCaption extends AbstractCaption {
         this.durationInMillis = durationInMillis;
         this.text = text;
     }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new DefaultCaption(
+                this.number, 
+                (Time) this.startTime.clone(), 
+                this.durationInMillis, 
+                new String(this.text));
+    }
 
 }

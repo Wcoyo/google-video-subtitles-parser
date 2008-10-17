@@ -30,7 +30,7 @@ import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public interface ITranscript {
+public interface ITranscript extends Cloneable {
 
     /**
      * The captions collection.
@@ -59,4 +59,18 @@ public interface ITranscript {
      */
     StringBuffer formatTranscript(
             ITranscriptFormatter formatter, StringBuffer toAppendTo);
+    
+    /**
+     * <p>As long as Cloneable interface doesn't expose a clone() method, we 
+     * need to publish this kind of behavior here for decoupling purposes.</p>
+     * 
+     * <p>{@link java.lang.Object#clone()} is an concrete (native) method so 
+     * we can't make it abstract again, but we can expose a delegate method 
+     * instead. </p>
+     * 
+     * @see java.lang.Object#clone()
+     * @return A <code>ITranscript</code> clone of the original object
+     * @throws CloneNotSupportedException If cloning isn't supported.
+     */
+    ITranscript doClone() throws CloneNotSupportedException;
 }
