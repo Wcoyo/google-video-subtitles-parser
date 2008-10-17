@@ -28,7 +28,7 @@ import java.sql.Time;
  * @version  M1 2008/09/04
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public interface ICaption {
+public interface ICaption extends Cloneable {
 
     /**
      * Sequential number, not generally applicable.
@@ -38,11 +38,25 @@ public interface ICaption {
     int getNumber();
     
     /**
+     * Setter for the sequential number.
+     * 
+     * @param newNumber The new sequential number to set.
+     */
+    void setNumber(int newNumber);
+    
+    /**
      * The caption's presentation start time.
      * 
      * @return Caption's presentation start time.
      */
     Time getStartTime();
+    
+    /**
+     * Setter for the caption's presentation start time.
+     * 
+     * @param newStartTime The new caption's presentation start time to set.
+     */
+    void setStartTime(Time newStartTime);
     
     /**
      * The caption's presentation duration.
@@ -52,6 +66,13 @@ public interface ICaption {
     long getDurationInMillis();
     
     /**
+     * Setter for the caption's presentation duration.
+     * 
+     * @param newDurationInMillis The new caption's presentation duration to set.
+     */
+    void setDurationInMillis(long newDurationInMillis);
+    
+    /**
      * The caption's text.
      * 
      * @return Caption's text.
@@ -59,9 +80,23 @@ public interface ICaption {
     String getText();
     
     /**
-     * Set the caption's text.
+     * Setter for the caption's text.
      * 
      * @param text The Caption's text to set.
      */
     void setText(String text);
+    
+    /**
+     * <p>As long as Cloneable interface doesn't expose a clone() method, we 
+     * need to publish this kind of behavior here for decoupling purposes.</p>
+     * 
+     * <p>{@link java.lang.Object#clone()} is an concrete (native) method so 
+     * we can't make it abstract again, but we can expose a delegate method 
+     * instead. </p>
+     * 
+     * @see java.lang.Object#clone()
+     * @return A <code>ICaption</code> clone of the original object
+     * @throws CloneNotSupportedException If cloning isn't supported.
+     */
+    ICaption doClone() throws CloneNotSupportedException;
 }

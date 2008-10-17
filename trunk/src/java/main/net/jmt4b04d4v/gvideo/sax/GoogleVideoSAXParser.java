@@ -171,7 +171,7 @@ public class GoogleVideoSAXParser {
                     parsableURLStr, null);
         }
         
-        //print parsableURLStr
+        //wait
         System.out.print("Please wait...\n");
         
         //Hold a reference of ContentHandler for post-parsing purposes 

@@ -101,7 +101,7 @@
         <delete quiet="true" dir="${dist}" />
         <delete quiet="true" dir="${target}" />
         <delete quiet="true">
-            <fileset dir="${basedir}" includes="TEST-*.xml,TEST-*.txt,*.srt,*.ssa" />
+            <fileset dir="${basedir}" includes="TEST-*.xml,TEST-*.txt,*.srt,*.ssa,*.gv" />
         </delete>
     </target>
 
@@ -302,8 +302,7 @@
                 <pathelement location="${testclasses}" />
             </classpath>
             <formatter type="xml"/>
-            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubRipTranscriptFormatterTest"/>
-            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubStationAlphaTranscriptFormatterTest"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.DefaultTestSuite"/>
         </junit>
     </target>
 
@@ -324,8 +323,7 @@
                 </fileset>
             </classpath>
             <formatter type="xml"/>
-            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubRipTranscriptFormatterTest"/>
-            <test name="net.jmt4b04d4v.gvideo.subparser.test.SubStationAlphaTranscriptFormatterTest"/>
+            <test name="net.jmt4b04d4v.gvideo.subparser.test.DefaultTestSuite"/>
         </junit>
     </target>
 

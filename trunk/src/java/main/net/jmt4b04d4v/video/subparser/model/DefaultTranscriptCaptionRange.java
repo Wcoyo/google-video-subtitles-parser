@@ -3,8 +3,6 @@
  */
 package net.jmt4b04d4v.video.subparser.model;
 
-import java.util.Iterator;
-
 /**
  * <p>Copyright (C) 2008 Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail 
  * dot com></p>
@@ -20,28 +18,34 @@ import java.util.Iterator;
  * <p>You should have received a copy of the GNU Lesser General Public License 
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
- * <p><code>DefaultTranscript</code> is a concrete <code>ITranscript</code> 
- * implementation. It doesn't add anything special yet, only a concrete class 
- * which can be instantiated.</p>
+ * <p><code>DefaultTranscriptCaptionRange</code> is a 
+ * <code>AbstractTranscriptCaptionRange</code> implementation for sub-list 
+ * caption selection range-based.</p>
  * 
- * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
- * @see      net.jmt4b04d4v.video.subparser.model.AbstractTranscript
- * @version  M1 2008/09/04
+ * @see      net.jmt4b04d4v.video.subparser.model.ITranscriptCaptionRange
+ * @version  M2 2008/10/16
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
-public class DefaultTranscript extends AbstractTranscript {
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        DefaultTranscript transcriptClone = new DefaultTranscript();
-        for (Iterator<ICaption> iter = captions.iterator(); iter.hasNext();) {
-            ICaption captionClone = iter.next().doClone();
-            transcriptClone.captions.add(captionClone);
-        }
-        return transcriptClone;
-    }
+public class DefaultTranscriptCaptionRange extends
+        AbstractTranscriptCaptionRange {
     
+    /**
+     * Hide default constructor
+     */
+    @SuppressWarnings("unused")
+    private DefaultTranscriptCaptionRange() {}
+    
+    /**
+     * <p>Constructor with defined caption list boundaries. They must be 
+     * validated against related transcript later</p> 
+     * 
+     * @param startRange The caption number (from 1 and counting) of the first 
+     * caption to be processed.
+     * @param endRange The caption number (from 1 and counting) of the last 
+     * caption to be processed.
+     */
+    public DefaultTranscriptCaptionRange(int startRange, int endRange) {
+        super(startRange, endRange);
+    }
+
 }

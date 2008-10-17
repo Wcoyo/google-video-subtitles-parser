@@ -3,8 +3,15 @@
  */
 package net.jmt4b04d4v.gvideo.subparser.test;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+
 import junit.framework.TestCase;
-import net.jmt4b04d4v.video.subparser.model.ICaption;
+import net.jmt4b04d4v.video.subparser.format.ITranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter;
+import net.jmt4b04d4v.video.subparser.model.ITranscript;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,27 +35,58 @@ import org.junit.Test;
  * formatter.</p>
  * 
  * @see      net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter
- * @version  M1 2008/09/04
+ * @version  M2 2008/10/17
  * @author   Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>
  */
 public class SubRipTranscriptFormatterTest extends TestCase {
 
     /**
+     * Writer reference.
+     */
+    private Writer out = null;
+    
+    /**
+     * Transcript built object reference.
+     */
+    private ITranscript transcript = null;
+    
+    /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        //TODO impl
+        //get transcript from prior test
+        transcript = ParseGoogleVideoTranscriptTest.getTranscript().doClone();
     }
 
     /**
      * Test method for {@link 
      * net.jmt4b04d4v.video.subparser.format.SubRipTranscriptFormatter#
-     * formatCaption(ICaption, StringBuffer)}.
+     * format(ITranscript, StringBuffer)}
      */
     @Test
-    public void testSRTTranscriptFormatCaption() {
-        //TODO impl
-        fail("Not implemented yet");
+    public void testSRTTranscriptFormat() {
+        //Make SubRip subtitles
+        try {
+            //Get transcript translator
+            ITranscriptFormatter formatter = 
+                new SubRipTranscriptFormatter();
+            //Format transcript
+            StringBuffer result = 
+                transcript.formatTranscript(formatter, new StringBuffer());
+            //Print string value
+            System.out.print(result.toString());
+            //Print to file
+            out = new PrintWriter(new File("output.srt"));
+            out.write(result.toString(),0,result.toString().length());
+            out.flush();
+            out.close();
+        } catch (IOException e) { 
+            throw new RuntimeException(
+                    "I/O Exception, output file may be inconsistent", e);
+        }
+        //TODO implement better testing here
+        System.out.println("Comparison not implemented yet, " +
+        "please validate output manually at this time");
     }
 } 
