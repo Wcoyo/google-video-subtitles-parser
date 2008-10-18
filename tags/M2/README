@@ -1,0 +1,102 @@
+Preamble
+--------
+The initial purpose of this mini project was to parse [1] Google Video's 
+provided spanish subtitles [2] of Randy Pausch's great 'Last Lecture' [3], 
+and convert it to other subtitle file formats (if you take a look at Google, 
+many people are looking for it).
+
+This can provide a source of 'open/closed captions' [4][5], that can be placed 
+or embedded in alternative movie file formats like MP4, 3GP, AVI, or others; or 
+simply used at play time using a video filter like VSFilter or FFDShow.
+
+At the time I'm writing this, I can also say that I'm a real novice in XML 
+parsing with Java, but I'm learning with this [6], so don't expect beautiful 
+or efficient code at this time. Instead YOU can give me a hand to beautify it, 
+improve its efficiency or make another contribution to improve it.
+
+It's a personal desire that Randy's message reach a broader audience, and as 
+long as I still don't owe a Randy Pausch DVD [7] (I want it [8], maybe at the 
+end of the year) but I've already downloaded a couple of versions from 
+YouTube/Google Video and I'm willing to make an 'in house' version to show it 
+to my Dad, other relatives and friends.
+
+
+Project
+-------
+The project is simply an utility that provides an XML parser for Google Video 
+transcriptions, and provides translators for some of the most common subtitle 
+file formats [9]. In the future it could be extended to cover another Video 
+sharing websites (e.g. YouTube, file a ticket if you're interested).
+
+API can be considered currently unstable and may change in following releases 
+with proper justification.
+
+
+Distribution
+------------
+For distribution terms see COPYING.LESSER file in distribution archive.
+
+
+Usage
+-----
+Current implementation works if video URL or transcript URL is provided. 
+Desired language subtitle track may be provided as part of the URL, if not it 
+will be prompted as user input from available list of subtitle tracks.
+
+From jar distribution:
+$ java -jar google-video-subtitles-parser-VERSION.jar URL
+
+Alternatively from binary distribution at google-video-subtitles-parser/build/java/classes
+$ java net.jmt4b04d4v.gvideo.sax.GoogleVideoSAXParser URL
+
+
+Current status
+--------------
+Currently, it provides translators for:
+ * SubRip (.srt)
+ * SubStation Alpha (.ssa)
+ * Google Video Transcript (experimental)
+
+Base filtering capabilities have also been implemented and are going to be 
+documented after public release (see related incomplete test for details).
+
+It needs more testing to guarantee its accuracy. I had Time Zone issues which 
+still have hacky fixes.
+
+
+To do list
+----------
+ * A new 'fancy' style for SubStation Alpha subtitles [I3].
+ * A handle to override SubStation Alpha default style [I4].
+ * A handle to provide SubStation Alpha meta data [I5].
+ * Implement more translators (extensions of AbstractTranscriptFormatter or 
+   new implementations of ITranscriptFormatter) [I6].
+
+No more ToDo here, use Google Code Issues [15] instead.
+
+
+Contact
+--------------
+If you want, you can reach me at <jmt4b04d4v at gmail dot com>, or you can 
+take a look at my blog at [http://softwarelibre.org.bo/jmtaboadav] where I will 
+publish availability and news.
+
+
+WWW Resources
+-------------
+ * [1] Syntactic analysis (AKA parsing), http://en.wikipedia.org/wiki/Parsing
+ * [2] Randy Pausch: "Really Achieving Your Childhood Dreams" (XML Video Transcript), http://video.google.com/videotranscript?docid=3047771997186190855&name=&lang=es
+ * [3] Randy Pausch: "Really Achieving Your Childhood Dreams" (104 min), http://video.google.com/videoplay?docid=3047771997186190855
+ * [4] Subtitles, http://en.wikipedia.org/wiki/Subtitle_(captioning)
+                          \/
+ * [5] Closed captioning [CC], http://en.wikipedia.org/wiki/Closed_captioning
+ * [6] Processing XML with Java by Elliotte Rusty Harold, http://www.cafeconleche.org/books/xmljava/
+ * [7] Randy Pausch DVD, https://www.randypauschdvd.com/
+ * [8] La última lección + DVD (Hardcover), http://www.amazon.com/%C3%BAltima-lecci%C3%B3n-DVD-Randy-Pausch/dp/0307392260
+ * [9] Subtitle file formats, http://en.wikipedia.org/wiki/Subtitle_(captioning)#Subtitle_formats
+ * [10] SubRip OCR software and file format, http://en.wikipedia.org/wiki/SubRip
+ * [11] SSA subtitle file format, http://en.wikipedia.org/wiki/SubStation_Alpha
+ * [12] VSFilter DirectShow filter, http://en.wikipedia.org/wiki/VSFilter
+ * [13] SAMI (Synchronized Accessible Media Interchange), http://en.wikipedia.org/wiki/SAMI
+ * [14] Understanding SAMI 1.0, http://msdn.microsoft.com/en-us/library/ms971327.aspx
+ * [15] Google Code Project issue tracker, http://code.google.com/p/google-video-subtitles-parser/issues/list

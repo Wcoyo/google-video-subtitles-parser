@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 1.6.0_02 (Sun Microsystems Inc.)
+Class-Path: lib/junit.jar google-video-subtitles-parser.jar
+Main-Class: net.jmt4b04d4v.gvideo.subparser.test.DefaultTestSuite
