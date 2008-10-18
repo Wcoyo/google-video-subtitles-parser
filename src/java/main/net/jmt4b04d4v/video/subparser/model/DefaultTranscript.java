@@ -21,8 +21,7 @@ import java.util.Iterator;
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>DefaultTranscript</code> is a concrete <code>ITranscript</code> 
- * implementation. It doesn't add anything special yet, only a concrete class 
- * which can be instantiated.</p>
+ * implementation. It overrides {@link java.lang.Object#clone()} method.</p>
  * 
  * @see      net.jmt4b04d4v.video.subparser.model.ITranscript
  * @see      net.jmt4b04d4v.video.subparser.model.AbstractTranscript
@@ -31,6 +30,12 @@ import java.util.Iterator;
  */
 public class DefaultTranscript extends AbstractTranscript {
 
+    /**
+     * Default constructor
+     */
+    public DefaultTranscript() {
+        super();
+    }
     /* (non-Javadoc)
      * @see java.lang.Object#clone()
      */

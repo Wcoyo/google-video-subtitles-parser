@@ -86,6 +86,11 @@ public abstract class AbstractTranscript implements ITranscript, Cloneable {
         return formatter.format(this, toAppendTo);
     }
     
+    /**
+     * Default constructor
+     */
+    protected AbstractTranscript() {}
+    
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

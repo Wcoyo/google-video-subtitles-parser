@@ -35,7 +35,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>GVXMLTranscriptHandler</code> is a SAX based XML reader utility 
- * that handles Google Video/YouTube <em>transcript</em> documents that carry 
+ * that handles Google Video <em>transcript</em> documents that carry 
  * subtitle information for some of their hosted videos. SAX is event driven, 
  * so this particular handler is appropriate only for this type of documents.</p>
  * <p>Although transcript documents doesn't provide validation information, its 

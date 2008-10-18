@@ -44,7 +44,7 @@ Desired language subtitle track may be provided as part of the URL, if not it
 will be prompted as user input from available list of subtitle tracks.
 
 From jar distribution:
-$ java -jar google-video-subtitles-parser.jar net.jmt4b04d4v.gvideo.sax.GoogleVideoSAXParser URL
+$ java -jar google-video-subtitles-parser-VERSION.jar URL
 
 Alternatively from binary distribution at google-video-subtitles-parser/build/java/classes
 $ java net.jmt4b04d4v.gvideo.sax.GoogleVideoSAXParser URL
@@ -55,21 +55,24 @@ Current status
 Currently, it provides translators for:
  * SubRip (.srt)
  * SubStation Alpha (.ssa)
+ * Google Video Transcript (experimental)
+
+Base filtering capabilities have also been implemented and are going to be 
+documented after public release (see related incomplete test for details).
+
 It needs more testing to guarantee its accuracy. I had Time Zone issues which 
 still have hacky fixes.
 
 
 To do list
 ----------
- * More documentation [I1-DONE].
- * Get Video Transcript URL from Video URL [DONE].
- * Handle locale of desired Subtitle (discuss alternatives/selection) [I2-DONE].
  * A new 'fancy' style for SubStation Alpha subtitles [I3].
  * A handle to override SubStation Alpha default style [I4].
  * A handle to provide SubStation Alpha meta data [I5].
  * Implement more translators (extensions of AbstractTranscriptFormatter or 
    new implementations of ITranscriptFormatter) [I6].
- * No more ToDo here, use Google Code Issues [16] instead.
+
+No more ToDo here, use Google Code Issues [15] instead.
 
 
 Contact

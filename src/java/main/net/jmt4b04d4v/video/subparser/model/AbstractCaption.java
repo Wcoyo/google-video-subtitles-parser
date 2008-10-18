@@ -113,7 +113,28 @@ public abstract class AbstractCaption implements ICaption, Cloneable {
     public void setText(String text) {
         this.text = text;
     }
-
+    
+    /**
+     * Hide default constructor.
+     */
+    protected AbstractCaption() {}
+    
+    /**
+     * Constructor with parameters.
+     * 
+     * @param number           The caption number (sequential numbering).
+     * @param startTime        The caption presentation start time.
+     * @param durationInMillis The caption presentation duration.
+     * @param text             The caption presentation text.
+     */
+    protected AbstractCaption(
+            int number, Time startTime, long durationInMillis, String text){
+        this.number = number;
+        this.startTime = startTime;
+        this.durationInMillis = durationInMillis;
+        this.text = text;
+    }
+    
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

@@ -44,4 +44,12 @@ public class DefaultTestSuite {
         //$JUnit-END$
         return suite;
     }
+    
+    /**
+     * Console application <em>adapter</em> to run this suite. 
+     * @param args Arguments sent to main program.
+     */
+    public static void main(String [] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -29,7 +29,7 @@
     <property name="build.sysclasspath" value="ignore" />
 
     <property name="name" value="google-video-subtitles-parser" />
-    <property name="version" value="M2dev" />
+    <property name="version" value="M2" />
 
     <property name="data" value="${basedir}/data" />
     <property name="src" value="${basedir}/src/java/main" />
@@ -44,8 +44,9 @@
     <property name="javadocs" value="${build}/javadocs" />
     <property name="readme" value="README" />
     <property name="copying" value="COPYING.LESSER" />
-    <property name="packages" value="net.jmt4b04d4v.gvideo.*" />
+    <property name="packages" value="net.jmt4b04d4v.*" />
     <property name="packages-exclude" value="net.jmt4b04d4v.gvideo.subparser.test.*" />
+    <property name="eclipse-settings" value="${basedir}/.settings" />
 
     <!-- ============================================================= -->
     <!-- Classpath with needed libraries to compile project            -->
@@ -145,10 +146,14 @@
             <bottom><![CDATA[<i>Copyright &#169; 2008 by Johans Marvin Taboada Villca &lt;jmt4b04d4v at gmail dot com>.</i>]]></bottom>
             <tag name="todo" scope="all" description="To do:" />
             <tag name="fixme" scope="all" description="Fixme:" />
-            <group title="Public Packages" packages="net.jmt4b04d4v.gvideo" />
-            <!-- <group title="Internal Implementation Packages" packages="net.jmt4b04d4v.gvideo.internal" /> -->
-            <link offline="true" href="http://java.sun.com/javase/6/docs/api/" 
-                  packagelistLoc="C:\jdk1.6.0_02\docs" />
+            <group title="Google Video Packages" packages="net.jmt4b04d4v.gvideo.*" />
+            <group title="Utils Packages" packages="net.jmt4b04d4v.util" />
+            <group title="General Video Packages" packages="net.jmt4b04d4v.video.*" />
+            <!-- If you want to chain project javadocs with -->
+            <!-- locally installed Java SE javadocs, -->
+            <!-- uncomment and set href and packagelistLoc attributes -->
+            <!-- <link offline="true" href="http://java.sun.com/javase/6/docs/api/" 
+                  packagelistLoc="C:\jdk1.6.0_02\docs" /> -->
             <!-- <link href="http://softwarelibre.org.bo/jmtaboadav" /> -->
         </javadoc>
     </target>
@@ -159,7 +164,7 @@
     <target name="dist_bin_zip" depends="jar">
         <zip destfile="${dist}/${name}-${version}.zip">
             <zipfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
-            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <zipfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}-${version}/lib" />
             <zipfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
             <zipfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
             <zipfileset dir="${classes}" prefix="${name}-${version}/build/java/classes" />
@@ -177,12 +182,13 @@
             <zipfileset dir="${data}" includes="videotranscript.xml" prefix="${name}/data" />
             <zipfileset dir="${src}" excludes="**/*.class" prefix="${name}/src/java/main" />
             <zipfileset dir="${testsrc}" excludes="**/*.class" prefix="${name}/src/java/test" />
-            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}/lib" />
+            <zipfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}/lib" />
             <zipfileset file="${basedir}/${readme}" fullpath="${name}/${readme}" />
             <zipfileset file="${basedir}/${copying}" fullpath="${name}/${copying}" />
             <zipfileset dir="." includes="build.xml" fullpath="${name}/build.xml" />
             <zipfileset dir="." includes=".project" fullpath="${name}/.project" />
             <zipfileset dir="." includes=".classpath" fullpath="${name}/.classpath" />
+            <zipfileset dir="${eclipse-settings}" includes="org.eclipse.mylyn.tasks.ui.prefs" fullpath="${name}/.settings/org.eclipse.mylyn.tasks.ui.prefs" />
         </zip>
     </target>
 
@@ -192,7 +198,7 @@
     <target name="dist_bin_tar" depends="jar">
         <tar destfile="${dist}/${name}-${version}.tar">
             <tarfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
-            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <tarfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}-${version}/lib" />
             <tarfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
             <tarfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
             <tarfileset dir="${classes}" prefix="${name}-${version}/build/java/classes" />
@@ -212,12 +218,13 @@
             <tarfileset dir="${data}" includes="videotranscript.xml" prefix="${name}/data" />
             <tarfileset dir="${src}" excludes="**/*.class" prefix="${name}/src/java/main" />
             <tarfileset dir="${testsrc}" excludes="**/*.class" prefix="${name}/src/java/test" />
-            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}/lib" />
+            <tarfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}/lib" />
             <tarfileset file="${basedir}/${readme}" fullpath="${name}/${readme}" />
             <tarfileset file="${basedir}/${copying}" fullpath="${name}/${copying}" />
             <tarfileset dir="." includes="build.xml" fullpath="${name}/build.xml" />
             <tarfileset dir="." includes=".project" fullpath="${name}/.project" />
             <tarfileset dir="." includes=".classpath" fullpath="${name}/.classpath" />
+            <tarfileset dir="${eclipse-settings}" includes="org.eclipse.mylyn.tasks.ui.prefs" fullpath="${name}/.settings/org.eclipse.mylyn.tasks.ui.prefs" />
         </tar>
         <gzip src="${dist}/${name}-${version}-src.tar" destfile="${dist}/${name}-${version}-src.tar.gz" />
         <delete file="${dist}/${name}-${version}-src.tar" />
@@ -229,7 +236,7 @@
     <target name="dist_jar_tar" depends="jar">
         <tar destfile="${dist}/${name}-${version}-jar.tar">
             <tarfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
-            <tarfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <tarfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}-${version}/lib" />
             <tarfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
             <tarfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
             <tarfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />
@@ -245,7 +252,7 @@
     <target name="dist_jar_zip" depends="jar">
         <zip destfile="${dist}/${name}-${version}-jar.zip">
             <zipfileset dir="${data}" includes="videotranscript.xml" excludes="" prefix="${name}-${version}/data" />
-            <zipfileset dir="${lib}" includes="*.jar" excludes="" prefix="${name}-${version}/lib" />
+            <zipfileset dir="${lib}" includes="*.jar,*.README,*.txt,*.htm, *.html" excludes="" prefix="${name}-${version}/lib" />
             <zipfileset dir="${target}" includes="${name}-${version}.jar" fullpath="${name}-${version}/${name}.jar" />
             <zipfileset dir="${target}" includes="${name}-tests-${version}.jar" fullpath="${name}-${version}/${name}-tests.jar" />
             <zipfileset file="${basedir}/${readme}" fullpath="${name}-${version}/${readme}" />

@@ -38,6 +38,9 @@ import net.jmt4b04d4v.video.subparser.model.ITranscript;
  */
 public class ReEnumerateCaptionsFilter extends AbstractLinearEditingFilter {
 
+    /**
+     * Current numbering index value.
+     */
     private int currentCaptionNumber = 1;
     
     /**

@@ -118,5 +118,8 @@ public class ParseGoogleVideoTranscriptTest extends TestCase {
                     "Due to an IOException, the parser could not check " + 
                     parsableURLStr, e);
         }
+        //TODO implement better testing here
+        System.out.println("Testing not implemented yet, " +
+                "rethink this...");
     }
 }
