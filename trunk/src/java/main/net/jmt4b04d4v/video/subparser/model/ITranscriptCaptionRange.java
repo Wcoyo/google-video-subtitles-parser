@@ -23,7 +23,7 @@ import java.util.List;
  * <p><code>ITranscriptCaptionRange</code> is a behavioral interface that 
  * defines common getters for fields and selective behavior.</p>
  * <p>Implementations should override 
- * {@link #getSelectedCaptionsList(ITranscript) method to apply selective 
+ * {@link #getSelectedCaptionsList(ITranscript)} method to apply selective 
  * criteria and return the sub-list of captions to be processed by the 
  * non-linear processing filter.</p>
  * 

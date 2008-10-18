@@ -26,7 +26,7 @@ import net.jmt4b04d4v.video.subparser.model.ITranscript;
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>GoogleVideoTranscriptFormatter</code> translates a transcript object 
- * (a list of captions) to the <em>Google Video</a> subtitle file format.</p>
+ * (a list of captions) to the <em>Google Video</em> subtitle file format.</p>
  * <p>Google Video subtitles are XML documents which carries sequence, 
  * timing and textual information only. XML documents define a common header 
  * so {@link #format(ITranscript, StringBuffer)} will be overridden.</p>

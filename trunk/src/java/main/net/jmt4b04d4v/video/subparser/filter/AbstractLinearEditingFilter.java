@@ -58,7 +58,7 @@ public abstract class AbstractLinearEditingFilter implements IFilter {
      * 
      * @param next Next Filter in the chain
      */
-    public AbstractLinearEditingFilter(IFilter next) {
+    protected AbstractLinearEditingFilter(IFilter next) {
         this.next = next;
     }
     

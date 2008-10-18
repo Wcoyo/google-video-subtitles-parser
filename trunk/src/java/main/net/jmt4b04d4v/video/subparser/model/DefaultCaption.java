@@ -21,7 +21,7 @@ import java.sql.Time;
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>DefaultCaption</code> is a concrete <code>ICaption</code> 
- * implementation. It defines a constructor with parameters.</p>
+ * implementation. It overrides {@link java.lang.Object#clone()} method.</p>
  * 
  * @see      net.jmt4b04d4v.video.subparser.model.ICaption
  * @see      net.jmt4b04d4v.video.subparser.model.AbstractCaption
@@ -39,17 +39,14 @@ public final class DefaultCaption extends AbstractCaption {
     /**
      * Constructor with parameters.
      * 
-     * @param number
-     * @param startTime
-     * @param durationInMillis
-     * @param text
+     * @param number           The caption number (sequential numbering).
+     * @param startTime        The caption presentation start time.
+     * @param durationInMillis The caption presentation duration.
+     * @param text             The caption presentation text.
      */
     public DefaultCaption(
             int number, Time startTime, long durationInMillis, String text){
-        this.number = number;
-        this.startTime = startTime;
-        this.durationInMillis = durationInMillis;
-        this.text = text;
+        super(number, startTime, durationInMillis, text);
     }
     
     /* (non-Javadoc)

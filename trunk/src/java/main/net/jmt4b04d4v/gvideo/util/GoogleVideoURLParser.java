@@ -253,7 +253,6 @@ public class GoogleVideoURLParser {
                             "from current user locale): " + parsableURLStr);
                 }
             }
-            //else 
         } catch (MalformedURLException e) {
             throw new RuntimeException(parsableURLStr + 
                     " is not a well-formed URL.", e);

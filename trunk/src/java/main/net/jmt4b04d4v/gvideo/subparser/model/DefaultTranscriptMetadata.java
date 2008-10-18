@@ -37,21 +37,17 @@ public class DefaultTranscriptMetadata extends AbstractTranscriptMetadata {
     /**
      * Constructor with parameters.
      * 
-     * @param trackId
-     * @param trackLangCode
-     * @param trackLangDefault
-     * @param trackLangOrig
-     * @param trackLangTransl
-     * @param trackName
+     * @param trackId          The track <em>id</em> attribute. 
+     * @param trackName        The track <em>name</em> attribute.
+     * @param trackLangCode    The track <em>lang_code</em> attribute.
+     * @param trackLangOrig    The track <em>lang_original</em> attribute.
+     * @param trackLangTransl  The track <em>lang_translated</em> attribute.
+     * @param trackLangDefault The track <em>lang_default</em> attribute.
      */
     public DefaultTranscriptMetadata(int trackId, String trackName, 
             String trackLangCode, String trackLangOrig, 
             String trackLangTransl, String trackLangDefault) {
-        this.trackId = trackId;
-        this.trackName = trackName;
-        this.trackLangCode = trackLangCode;
-        this.trackLangOrig = trackLangOrig;
-        this.trackLangTransl = trackLangTransl;
-        this.trackLangDefault = trackLangDefault;
+        super(trackId, trackName, trackLangCode, trackLangOrig, 
+                trackLangTransl, trackLangDefault);
     }
 }

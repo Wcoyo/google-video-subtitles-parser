@@ -69,7 +69,7 @@ public abstract class AbstractNonLinearEditingFilter implements IFilter {
      * @param next Next Filter in the chain.
      * @param captionRange The caption range to apply filtering capabilities.
      */
-    public AbstractNonLinearEditingFilter(
+    protected AbstractNonLinearEditingFilter(
             IFilter next, ITranscriptCaptionRange captionRange) {
         this.next = next;
         this.captionRange = captionRange;

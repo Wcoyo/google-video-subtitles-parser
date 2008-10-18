@@ -49,7 +49,7 @@ view_count_yesterday    [R]      only available via a details request: the numbe
  * along with google-video-subtitles-parser. If not, see 
  * <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
  * <p><code>Video</code> is a properties holder class that aims to carry 
- * information about a particular video at Google Video or YouTube.</p>
+ * information about a particular video at Google Video.</p>
  * <p>It might be useful to implement an API to query Google servers and build 
  * instances with this information, although this is not needed right now.</p>
  * 
